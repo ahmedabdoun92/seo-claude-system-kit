@@ -1,0 +1,402 @@
+<title>SEO Claude System</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A complete SEO department run by Claude: 10 departments, 50 roles, free data sources, weekly and monthly loops, English and Arabic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an operating manual — left-aligned editorial column, one sample "Monday report" card as the hero object, data set in mono. */
+:root{
+  --paper:#F1F4F2; --surface:#FFFFFF; --ink:#12201B; --muted:#56665F; --line:#D3DCD8;
+  --accent:#0A7558; --accent-soft:#DDEFE8; --signal:#B9770C; --signal-soft:#F6EBD5; --planned:#8A9690; --planned-soft:#E7ECEA;
+  --display:"Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0D1512; --surface:#14201C; --ink:#E6EEEA; --muted:#97A7A0; --line:#25342E;
+  --accent:#3FC79D; --accent-soft:#16342B; --signal:#EBB04F; --signal-soft:#382C14; --planned:#66756F; --planned-soft:#1D2925; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D1512; --surface:#14201C; --ink:#E6EEEA; --muted:#97A7A0; --line:#25342E;
+  --accent:#3FC79D; --accent-soft:#16342B; --signal:#EBB04F; --signal-soft:#382C14; --planned:#66756F; --planned-soft:#1D2925; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--body);margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2.4rem,5.4vw,4.2rem);font-weight:700}
+h2{font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0;max-width:65ch}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font:500 .78rem/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+section{padding-block:var(--s8);border-top:1px solid var(--line)}
+.section-head{display:grid;gap:var(--s3);margin-bottom:var(--s6);max-width:760px}
+.lede{font-size:1.15rem;color:var(--muted)}
+
+/* top bar */
+.bar{padding-block:var(--s4);display:flex;justify-content:space-between;align-items:center;gap:var(--s4);flex-wrap:wrap}
+.brand{font:700 1.05rem/1 var(--display);display:flex;align-items:center;gap:var(--s2)}
+.brand-mark{width:22px;height:22px;border-radius:5px;background:var(--accent);display:grid;place-items:center;color:var(--surface);font:600 .7rem/1 var(--mono)}
+.bar nav{display:flex;gap:var(--s5);flex-wrap:wrap;font-size:.92rem}
+.bar nav a{color:var(--muted);text-decoration:none}
+.bar nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--s7);align-items:center;padding-block:var(--s7) var(--s8)}
+.hero-copy{display:grid;gap:var(--s5);min-width:0}
+.hero-copy .lede{font-size:1.2rem}
+.facts{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);font:500 .9rem/1.4 var(--mono);color:var(--muted)}
+.facts b{color:var(--ink);font-weight:500}
+.report{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:var(--s5);display:grid;gap:var(--s4);min-width:0;box-shadow:0 18px 40px -28px rgba(10,40,30,.35)}
+.report-head{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;font:500 .78rem/1.3 var(--mono);color:var(--muted)}
+.report h3{font-size:1.05rem}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.kpi{border-top:1px solid var(--line);padding-top:var(--s2)}
+.kpi .n{font:600 1.6rem/1.1 var(--display);font-variant-numeric:tabular-nums}
+.kpi .l{font-size:.78rem;color:var(--muted)}
+.up{color:var(--accent);font:500 .78rem/1 var(--mono)}
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2);font-size:.88rem}
+.todo li{display:flex;gap:var(--s2);align-items:baseline}
+.todo li::before{content:"";flex:0 0 8px;height:8px;border:1.5px solid var(--accent);border-radius:2px;transform:translateY(-1px)}
+.report-foot{font:400 .72rem/1.4 var(--mono);color:var(--muted)}
+
+/* cycle */
+.cycle{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
+.cycle li{display:grid;gap:var(--s2);align-content:start;padding-top:var(--s3);border-top:2px solid var(--ink);min-width:0}
+.cycle .step{font:500 .8rem/1 var(--mono);color:var(--accent)}
+.cycle p{font-size:.97rem;color:var(--muted)}
+.who{margin-top:var(--s6);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5)}
+.who div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:var(--s5);display:grid;gap:var(--s2);min-width:0}
+
+/* departments */
+.legend{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s5)}
+.chip{font:500 .82rem/1 var(--mono);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.55rem .85rem;cursor:pointer;display:inline-flex;gap:.5rem;align-items:center}
+.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dot.ready{background:var(--accent)} .dot.partial{background:var(--signal)} .dot.planned{background:var(--planned)}
+.depts{display:grid;gap:var(--s2)}
+.dept{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:var(--s3);align-items:center;padding-block:var(--s2);border-bottom:1px solid var(--line)}
+.dept-name{font:600 1rem/1.25 var(--display);display:flex;gap:var(--s2);align-items:baseline}
+.dept-name .num{font:500 .75rem/1 var(--mono);color:var(--muted);min-width:1.6rem}
+.roles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s2)}
+.role{font:500 .76rem/1.25 var(--mono);padding:.5rem .55rem;border-radius:6px;overflow-wrap:anywhere;transition:opacity .2s}
+.role.ready{background:var(--accent-soft);color:var(--ink)}
+.role.partial{background:var(--signal-soft);color:var(--ink)}
+.role.planned{background:var(--planned-soft);color:var(--muted);text-decoration:line-through;text-decoration-color:var(--planned)}
+.role.dim{opacity:.18}
+.tally{margin-top:var(--s5);font:500 .9rem/1.5 var(--mono);color:var(--muted)}
+
+/* loops */
+.loops{width:100%;border-collapse:collapse;font-size:.95rem}
+.loops th,.loops td{text-align:left;padding:var(--s3) var(--s3) var(--s3) 0;border-bottom:1px solid var(--line);vertical-align:top}
+.loops th{font:500 .74rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.loops td:first-child{font:500 .9rem/1.4 var(--mono);white-space:nowrap;color:var(--accent)}
+.table-scroll{overflow-x:auto}
+
+/* deliverables */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)}
+.deliv{display:grid;gap:var(--s2);align-content:start;min-width:0}
+.deliv .tag{font:500 .74rem/1 var(--mono);color:var(--muted)}
+.deliv p{font-size:.97rem;color:var(--muted)}
+
+/* rules */
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4) var(--s6)}
+.rules li{display:grid;gap:var(--s1);min-width:0}
+.rules b{font-family:var(--display);font-size:1.08rem}
+.rules span{color:var(--muted);font-size:.97rem}
+
+/* case study */
+.case{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--s7);align-items:start}
+.case-copy{display:grid;gap:var(--s4);min-width:0}
+.before-after{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.before-after th,.before-after td{padding:var(--s3) var(--s3) var(--s3) 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:baseline}
+.before-after th{font:500 .74rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.before-after td.now{font:600 1.05rem/1.3 var(--display);color:var(--accent)}
+.before-after td.src{font:400 .78rem/1.3 var(--mono);color:var(--muted)}
+.note{font-size:.88rem;color:var(--muted);margin-top:var(--s4)}
+
+/* stack */
+.stack{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.stack span{font:500 .85rem/1 var(--mono);border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:.6rem .8rem}
+.skipped{margin-top:var(--s4);font-size:.95rem;color:var(--muted)}
+
+/* limits + roadmap */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s7)}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s4)}
+.list li{display:grid;gap:var(--s1);padding-left:var(--s4);border-left:2px solid var(--line);min-width:0}
+.list b{font-weight:600}
+.list span{color:var(--muted);font-size:.95rem}
+.horizon{font:500 .74rem/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-top:var(--s2)}
+
+footer{border-top:1px solid var(--line);padding-block:var(--s6);font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero,.case,.two{grid-template-columns:minmax(0,1fr);gap:var(--s6)}
+  .cycle,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dept{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  section{padding-block:var(--s7)}
+  .cycle,.grid3,.rules,.who{grid-template-columns:minmax(0,1fr)}
+  .roles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bar nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="wrap bar">
+  <div class="brand"><span class="brand-mark" aria-hidden="true">SC</span>SEO Claude System</div>
+  <nav aria-label="Sections">
+    <a href="#how">How it works</a><a href="#departments">Departments</a><a href="#loops">Loops</a><a href="#results">Results</a><a href="#roadmap">Roadmap</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <span class="eyebrow">An SEO department, run by Claude</span>
+      <h1>Your whole SEO team, working every week on free data.</h1>
+      <p class="lede">The SEO Claude System runs strategy, technical audits, content, AI-search visibility and reporting for any company website. It finds the problems, fixes them in your site through reviewable changes, and checks that the fix worked. It does this on Google's and Bing's own free data, with no SEO subscriptions.</p>
+      <div class="facts" aria-label="Key facts">
+        <span><b>10</b> departments</span><span><b>50</b> roles</span><span><b>34</b> ready today</span><span><b>English + Arabic</b></span><span><b>$0</b> in SEO tool subscriptions</span>
+      </div>
+    </div>
+
+    <aside class="report" aria-label="Example: a Monday report">
+      <div class="report-head"><span>Monday report · 09:00</span><span>example client · week to 16 Oct</span></div>
+      <h3>This week at a glance</h3>
+      <div class="kpis">
+        <div class="kpi"><div class="n">86</div><div class="l">Google impressions</div><span class="up">▲ from 18</span></div>
+        <div class="kpi"><div class="n">35/110</div><div class="l">pages indexed</div><span class="up">▲ 22 this week</span></div>
+        <div class="kpi"><div class="n">0</div><div class="l">technical problems</div><span class="up">110 of 110 pages OK</span></div>
+        <div class="kpi"><div class="n">6/6</div><div class="l">search &amp; AI crawlers allowed</div><span class="up">Google, Bing, ChatGPT, Claude…</span></div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:.5rem">What to do this week</div>
+        <ul class="todo">
+          <li>Request indexing for 10 hotel pages (list included)</li>
+          <li>Refresh the home page: impressions 15 → 9</li>
+          <li>Owner: set up the Google Business Profile</li>
+        </ul>
+      </div>
+      <div class="report-foot">Source: Google Search Console, URL Inspection API, GA4, live crawl. Numbers from a real client.</div>
+    </aside>
+  </div>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>One operating cycle, the same for every client.</h2>
+        <p class="lede">Every client gets its own folder, its own data history and its own schedule. The cycle below runs in this order the first time, then the loops keep it going.</p>
+      </div>
+      <ol class="cycle">
+        <li><span class="step">1 · Onboard</span><h3>Business, platform, competitors</h3><p>Business facts come from the owner, never guessed. The system finds the 3–5 biggest competitors with free authority numbers and drafts 20–50 real customer questions.</p></li>
+        <li><span class="step">2 · Baseline</span><h3>Where the site stands today</h3><p>90 days of Search Console and GA4, the index status of every URL, mobile speed and conversion tracking, saved as a snapshot to compare against.</p></li>
+        <li><span class="step">3 · Audit and fix</span><h3>Changes you can review</h3><p>Technical and AI-readiness audits. Fixes are made on a separate branch, built, checked, and shown on a preview link before anyone merges.</p></li>
+        <li><span class="step">4 · Content</span><h3>Pages that answer real questions</h3><p>Gaps come from AI answers and Search Console. Every guide starts from a sourced fact sheet; numbers are checked again after translation.</p></li>
+        <li><span class="step">5 · AI visibility</span><h3>Are you cited by AI search?</h3><p>Every customer question is asked to AI search. The system records who gets cited, where the answers are weak, and which pages to build.</p></li>
+        <li><span class="step">6 · Loops</span><h3>It keeps running</h3><p>A Monday report, a monthly technical check and a monthly AI round compare each period with the last and say what to do next.</p></li>
+      </ol>
+      <div class="who">
+        <div><span class="eyebrow">Claude does</span><p>Analysis, code changes, content, translations, reports, outreach drafts, and the checks that prove each change worked.</p></div>
+        <div><span class="eyebrow">You approve</span><p>Merging changes, account settings (Search Console, Cloudflare, business profiles), sending any message, and the business facts only you know.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="departments">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The department</span>
+        <h2>10 departments, 50 roles, with honest status.</h2>
+        <p class="lede">Each role is marked ready, partial or planned. Planned roles are never presented as done. Choose a status to see where each role sits.</p>
+      </div>
+      <div class="legend" role="group" aria-label="Filter roles by status">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All 50</button>
+        <button class="chip" type="button" data-filter="ready" aria-pressed="false"><span class="dot ready"></span>Ready <span id="n-ready"></span></button>
+        <button class="chip" type="button" data-filter="partial" aria-pressed="false"><span class="dot partial"></span>Partial <span id="n-partial"></span></button>
+        <button class="chip" type="button" data-filter="planned" aria-pressed="false"><span class="dot planned"></span>Planned <span id="n-planned"></span></button>
+      </div>
+      <div class="depts" id="depts"></div>
+      <p class="tally" id="tally"></p>
+    </div>
+  </section>
+
+  <section id="loops">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Always on</span>
+        <h2>Loops that run without being asked.</h2>
+        <p class="lede">Each client gets the same schedule, with its own Search Console property. Every run compares with the last one, so the report says what changed, not only what is.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="loops">
+          <thead><tr><th>When</th><th>Loop</th><th>What it checks</th><th>You receive</th></tr></thead>
+          <tbody>
+            <tr><td>Mon 09:00</td><td>Weekly report</td><td>Clicks, impressions, rankings and movers, new and lost searches, quick wins, decaying pages, the index status of every URL, Bing, conversions</td><td>Report with a ranked "what to do this week" list and open owner tasks</td></tr>
+            <tr><td>1st · 09:00</td><td>Technical check</td><td>Every page's status, canonical, title, description, headings, thin and weakly linked pages, broken links, language pairs, crawler access, mobile speed, forms and booking links</td><td>Problems with the fix for each, marked new or fixed since last month</td></tr>
+            <tr><td>17th · 10:00</td><td>AI visibility round</td><td>Every customer question asked to AI search, in each language the client serves</td><td>Cited / mentioned vs last month, sources AI trusts, weak answers to target</td></tr>
+            <tr><td>Monthly</td><td>Client report</td><td>Search, indexing, technical health, AI visibility, work done, next steps</td><td>A branded report to send to the client, in English or Arabic</td></tr>
+            <tr><td>Every 3 days</td><td>Keep-alive and backup</td><td>The site's database answers; tables backed up weekly</td><td>An alert only if something fails</td></tr>
+            <tr><td>Mon 11:30</td><td>System backup</td><td>All client folders, reports and settings</td><td>A versioned, private history</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What a client gets</span>
+        <h2>Deliverables, not dashboards to interpret.</h2>
+      </div>
+      <div class="grid3">
+        <div class="deliv"><span class="tag">technical</span><h3>Fixed site, proven</h3><p>Redirects, canonicals, structured data, speed, language tags and crawler access fixed in the code, each change previewed and re-tested live.</p></div>
+        <div class="deliv"><span class="tag">content</span><h3>Pages that answer customers</h3><p>Guides and comparison pages built from official sources, answer-first, with FAQs and internal links, in every language the business serves.</p></div>
+        <div class="deliv"><span class="tag">ai search</span><h3>A citation plan</h3><p>Which questions AI answers badly, which sites it trusts, and the pages and mentions that can make the business the cited source.</p></div>
+        <div class="deliv"><span class="tag">reporting</span><h3>Weekly and monthly reports</h3><p>A working report every Monday and a client-ready monthly report, with every number sourced and small numbers called small.</p></div>
+        <div class="deliv"><span class="tag">operations</span><h3>A to-do list per client</h3><p>Owner, Claude and waiting tasks in one list, read by the Monday report, so nothing stalls quietly.</p></div>
+        <div class="deliv"><span class="tag">trust</span><h3>Reviews and profiles</h3><p>A playbook and bilingual templates for business profiles and review requests. The owner sends; Claude drafts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ground rules</span>
+        <h2>Built-in rules that keep the work honest.</h2>
+      </div>
+      <ul class="rules">
+        <li><b>Free tools only</b><span>Google Search Console, GA4, PageSpeed, CrUX, Bing Webmaster and open data. Anything that needs a paid tool is skipped and named.</span></li>
+        <li><b>Facts come from the owner</b><span>Unknown business details stay "TBD". Every number names its source and date.</span></li>
+        <li><b>Platform-specific advice</b><span>Fixes are written for the client's own platform: custom code, WordPress, Shopify, Webflow or others.</span></li>
+        <li><b>Nothing ships unreviewed</b><span>Code changes go through a branch and a preview; the owner merges. Outreach is drafts only.</span></li>
+        <li><b>Honest status</b><span>Planned features are labelled planned. Early results are labelled early.</span></li>
+        <li><b>Everything is logged</b><span>Each client has a dated work log, data snapshots and a versioned backup.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap case">
+      <div class="case-copy">
+        <span class="eyebrow">Case study · luxury travel agency</span>
+        <h2>ReserVella, Egypt: the first 3 days.</h2>
+        <p>ReserVella books 4- and 5-star Red Sea resorts for Egyptian and Gulf families and couples. The system onboarded it on 16 October 2026, fixed the site, built the content gaps AI search could not answer, and launched a full Arabic version.</p>
+        <p class="muted">Clicks and leads from search are still at zero. Those are the real test over the next one to three months, and the weekly report tracks them.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="before-after">
+          <thead><tr><th>Measure</th><th>Start</th><th>19 Oct</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td>Pages on the site</td><td>46</td><td class="now">110, in 2 languages</td><td class="src">sitemap</td></tr>
+            <tr><td>Pages indexed by Google</td><td>13</td><td class="now">35</td><td class="src">URL Inspection</td></tr>
+            <tr><td>Google impressions per week</td><td>18</td><td class="now">86</td><td class="src">Search Console</td></tr>
+            <tr><td>AI crawlers (GPTBot, ClaudeBot)</td><td>blocked</td><td class="now">allowed</td><td class="src">live test</td></tr>
+            <tr><td>Mobile speed, hotel page</td><td>76</td><td class="now">95–100</td><td class="src">PageSpeed Insights</td></tr>
+            <tr><td>Technical problems on the live site</td><td>many</td><td class="now">0</td><td class="src">monthly check</td></tr>
+            <tr><td>Conversion tracking</td><td>none</td><td class="now">WhatsApp, phone, email, form</td><td class="src">GA4</td></tr>
+            <tr><td>Answers citing the brand in AI search</td><td>0 of 34</td><td class="now">re-test 17 Nov</td><td class="src">AI visibility round</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Search Console data runs about 3 days behind, and one week of impressions is a direction, not a trend.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The data stack</span>
+        <h2>Real search-engine data, at no tool cost.</h2>
+        <p class="lede">The system reads the search engines' own reports instead of third-party estimates.</p>
+      </div>
+      <div class="stack">
+        <span>Google Search Console</span><span>URL Inspection API</span><span>Google Analytics 4</span><span>PageSpeed Insights</span><span>Chrome UX Report</span><span>Bing Webmaster Tools</span><span>IndexNow</span><span>Open PageRank</span><span>Tranco ranking</span><span>Live web search</span><span>Schema validation</span>
+      </div>
+      <p class="skipped">Not used: paid keyword databases and backlink indexes. The system works without search-volume estimates and says so where they would help.</p>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="wrap two">
+      <div>
+        <div class="section-head"><span class="eyebrow">Limits</span><h2>What it does not do yet.</h2></div>
+        <ul class="list">
+          <li><b>Keyword search volumes</b><span>Free sources only, so topics are chosen from Search Console, customer questions and AI answers rather than volume estimates.</span></li>
+          <li><b>Scheduled work needs a running computer</b><span>Loops run from the operator's machine today; moving them to the cloud is on the roadmap.</span></li>
+          <li><b>AI tracking is a monthly sample</b><span>The same questions every month give a clear direction, not an exact share of voice.</span></li>
+          <li><b>Authority takes the owner's time</b><span>Reviews, business profiles and outreach need the owner to act; the system drafts and tracks.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-head"><span class="eyebrow">Roadmap</span><h2>What is being added next.</h2></div>
+        <ul class="list">
+          <li><span class="horizon">This month</span><b>Keyword-gap and page-vs-top-10 loops</b><span>Turn on automatically once Search Console has enough data.</span></li>
+          <li><span class="horizon">This month</span><b>Reviews and business-profile programme</b><span>Bilingual request and reply templates, monthly tracking.</span></li>
+          <li><span class="horizon">Next 90 days</span><b>Loops in the cloud</b><span>Reports and checks run whether or not a computer is on.</span></li>
+          <li><span class="horizon">Next 90 days</span><b>Link prospecting and content refresh</b><span>From free link data, and refresh drafts for pages that lose ground.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>SEO Claude System · an SEO department run by Claude Code</span>
+    <span class="mono">Status as of 19 October 2026</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DATA = [["SEO Strategy & Planning",[["seo-strategy","ready"],["competitor-analysis","ready"],["content-planning","partial"],["topic-mapping","ready"],["seo-forecasting","planned"]]],["Keyword & Prompt Research",[["keyword-research","planned"],["prompt-research","planned"],["search-intent","ready"],["keyword-clustering","ready"],["query-expansion","ready"]]],["Technical SEO & Audits",[["site-audit","ready"],["crawl-analysis","ready"],["indexation-check","ready"],["schema-markup","ready"],["core-web-vitals","ready"]]],["Content Briefs & Creation",[["content-briefs","ready"],["content-writing","ready"],["content-editing","ready"],["content-optimization","ready"],["content-calendar","partial"]]],["On-Page SEO & Internal Linking",[["on-page-seo","ready"],["internal-linking","ready"],["meta-optimization","ready"],["entity-optimization","partial"],["sitemap-management","ready"]]],["AI Search Visibility",[["ai-visibility","ready"],["answer-engine-tracking","ready"],["brand-mentions","partial"],["prompt-monitoring","ready"],["visibility-insights","ready"]]],["Citation & Mention Building",[["citation-research","ready"],["source-analysis","partial"],["mention-building","partial"],["expert-quotes","planned"],["citation-tracking","ready"]]],["Link Building & Digital PR",[["link-prospecting","partial"],["digital-pr","ready"],["outreach","ready"],["linkable-assets","partial"],["backlink-analysis","ready"]]],["Content Refresh & Recovery",[["content-refresh","planned"],["decay-analysis","ready"],["content-recovery","planned"],["freshness-check","partial"],["redirect-review","partial"]]],["SEO Reporting & Analytics",[["seo-reporting","ready"],["rank-tracking","ready"],["traffic-analysis","ready"],["conversion-tracking","ready"],["performance-insights","ready"]]]];
+  var host = document.getElementById("depts");
+  var counts = { ready: 0, partial: 0, planned: 0 };
+  DATA.forEach(function (d, i) {
+    var row = document.createElement("div");
+    row.className = "dept";
+    var name = document.createElement("div");
+    name.className = "dept-name";
+    name.innerHTML = '<span class="num">' + String(i + 1).padStart(2, "0") + "</span>";
+    name.appendChild(document.createTextNode(d[0]));
+    var roles = document.createElement("div");
+    roles.className = "roles";
+    d[1].forEach(function (r) {
+      counts[r[1]]++;
+      var el = document.createElement("span");
+      el.className = "role " + r[1];
+      el.dataset.status = r[1];
+      el.title = r[0] + " · " + r[1];
+      el.textContent = r[0];
+      roles.appendChild(el);
+    });
+    row.appendChild(name);
+    row.appendChild(roles);
+    host.appendChild(row);
+  });
+  ["ready", "partial", "planned"].forEach(function (s) { document.getElementById("n-" + s).textContent = counts[s]; });
+  document.getElementById("tally").textContent =
+    counts.ready + " ready · " + counts.partial + " partial · " + counts.planned + " planned. Partial roles work with limits; planned roles are not built yet.";
+  var chips = document.querySelectorAll(".chip");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.filter;
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+      document.querySelectorAll(".role").forEach(function (el) {
+        el.classList.toggle("dim", f !== "all" && el.dataset.status !== f);
+      });
+    });
+  });
+})();
+</script>

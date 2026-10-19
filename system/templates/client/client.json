@@ -1,0 +1,18 @@
+{
+  "domain": "{{domain}}",
+  "business_name": "",
+  "created": "{{date}}",
+  "platform": "",
+  "site_access": "",
+  "markets": [],
+  "languages": [],
+  "gsc_property": "",
+  "ga4_property_id": "",
+  "bing_site": "",
+  "onboarding": {
+    "profile": false,
+    "access_checked": false,
+    "competitors": false,
+    "questions": false
+  }
+}

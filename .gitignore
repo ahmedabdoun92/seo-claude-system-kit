@@ -1,0 +1,22 @@
+# Client data never goes in the public repo
+clients/*
+!clients/README.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets (keys live in ~/.config/claude-seo, never here)
+.env
+*.key
+*secret*
+*credentials*.json
+service-account*.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
