@@ -22,6 +22,7 @@ Reply in the user's language. Keep messages short and plain.
 | "clients overview" / "all clients" | `python "$HOME_SCS/system/scripts/clients_overview.py" --md` and show the table |
 | "<client> indexing list" / "what should I request today" | `python "$HOME_SCS/system/scripts/indexing_queue.py" <domain>` (add `--mark` once the owner has requested them) |
 | "<client> monthly client report" | §10 Client report |
+| "run everything for <client>" / "full run" / "A to Z" | §11 Full run |
 | "check <client> setup" / "is the system healthy" | `python "$HOME_SCS/system/setup/check_client.py" <domain>` and `python "$HOME_SCS/system/tests/smoke.py"` |
 | a domain, brand or client name | §3 Client flow |
 | only "SEO Claude System" | List clients (above). Ask which client to work on, or whether to add a new one |
@@ -130,8 +131,31 @@ Tell the user the headline (pages, OK, problems, new vs fixed), the new problems
 - `python "$HOME_SCS/system/setup/backup.py"` commits the whole SEO System folder (plus a copy of this skill and the client scheduled tasks) and pushes to its **private** GitHub remote. It runs every Monday at 11:30. Keys are never in this folder.
 - `python "$HOME_SCS/system/scripts/link_map.py" <domain>` maps internal links from page content only (menus and footers ignored) and lists pages with fewer than 3; the monthly check includes it.
 
+- **Public kit (shareable copy, no client data):** `python "$HOME_SCS/system/setup/export_public.py" --dest <public repo folder>` rebuilds the public repo from this system (scripts, setup, templates, reference, skill, overview page), replaces local paths with placeholders and stops if its privacy scan finds keys, emails, property ids or personal paths. Then commit and push in that folder. Client folders are never exported.
+
 ## 10. Client report, to-do lists and playbooks
 
 - `python "$HOME_SCS/system/scripts/client_report.py" <domain> --month YYYY-MM [--lang ar]` writes a branded, client-facing HTML report (`reports/client-report-<month>.html`) from the weekly snapshots, indexing, technical check, AI visibility, log and todo.md. Only real data; sections without data are skipped.
 - Every client has `todo.md` (Owner / Claude / Waiting). Update it after each piece of work; the Monday report lists the open owner and waiting items.
 - Playbooks in `system/reference/`: `playbook-multilingual.md`, `playbook-content-pipeline.md`, `playbook-site-changes.md`, `playbook-reviews-and-gbp.md`. Follow them for those jobs.
+
+## 11. Full run, A to Z ("run everything for <client>")
+
+Runs every ready part of the department for one client and ends with one summary report. Long steps run in the background while agents work in parallel.
+
+| Step | What | How |
+|---|---|---|
+| A. Setup | Tools and client health | `check_setup.py --client <domain> --json`, `check_client.py <domain>` |
+| B. Search data | Weekly report: rankings, movers, decay, index status of every URL, Bing, conversions | `weekly_report.py <domain>` (background) |
+| C. Technical | Live crawl, link map, crawler access, lead-path URLs, mobile PageSpeed | `tech_audit.py <domain>` (background, after B) |
+| D. Competitors | Fresh authority numbers for the client and its competitors | `competitor_numbers.py <domain> <competitor_domains…> --json` (show the numbers; keep `competitors.md` unless the user approves changes) |
+| E. AI visibility | The monthly round over every question in `questions.md` | §7 with 4 parallel agents |
+| F. AI readiness | Crawler access, llms.txt, citable passages, entity signals, vs the last audit | `seo-geo` agent → `reports/geo-audit-<date>.md` |
+| G. Content quality | E-E-A-T, depth, thin/duplicate text, translation accuracy | `seo-content` agent → `reports/content-audit-<date>.md` |
+| H. Structured data | JSON-LD per page type, cross-page and cross-language consistency | `seo-schema` agent → `reports/schema-audit-<date>.md` |
+| I. Indexing | Today's 10 URLs to request | `indexing_queue.py <domain>` |
+| J. Client report | Last complete month (and the current month so far, if useful) | `client_report.py <domain> [--lang …]` |
+| K. Overview | All clients in one table | `clients_overview.py --md` |
+| Z. Summary | One report: scores, what changed, every finding de-duplicated and ranked, each tagged [code] / [owner] / [content] / [outreach — drafts only], plus what was skipped and why | `reports/full-run-<date>.md`, a log line, `todo.md` updated, `backup.py` |
+
+Agents are read-only: they write their report and change nothing else. Fixes are proposed, not made: code fixes go on a branch only when the user says so.
